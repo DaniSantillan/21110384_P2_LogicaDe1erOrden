@@ -1,0 +1,24 @@
+class Paciente:
+    def __init__(self, fiebre, tos):
+        self.fiebre = fiebre
+        self.tos = tos
+
+def diagnosticar(paciente):
+    if paciente.fiebre and paciente.tos:
+        return "Posible infección"
+    elif paciente.fiebre:
+        return "Fiebre, pero no hay tos"
+    elif paciente.tos:
+        return "Tos, pero no hay fiebre"
+    else:
+        return "Sin síntomas aparentes"
+
+# Crear un paciente con fiebre y tos
+paciente1 = Paciente(True, True)
+resultado1 = diagnosticar(paciente1)
+print("Resultado para el paciente 1:", resultado1)
+
+# Crear un paciente sin fiebre ni tos
+paciente2 = Paciente(False, False)
+resultado2 = diagnosticar(paciente2)
+print("Resultado para el paciente 2:", resultado2)
