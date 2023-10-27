@@ -1,0 +1,35 @@
+PROLOG:
+
+from pyswip import Prolog
+
+# Inicializar el motor Prolog
+prolog = Prolog()
+
+# Definir hechos en Prolog
+prolog.assertz("padre(juan, pedro)")
+prolog.assertz("padre(juan, maria)")
+
+# Consulta en Prolog
+list(prolog.query("padre(juan, X)"))
+
+# Salida: [{'X': 'pedro'}, {'X': 'maria'}]
+
+
+CLIPS:
+
+from pyclips import Environment
+
+# Inicializar el entorno CLIPS
+env = Environment()
+
+# Cargar reglas en CLIPS
+env.load("defrule example-rule (padre juan ?hijo) => (printout t ?hijo crlf))")
+
+# Assertar hechos en CLIPS
+env.assert_string("(padre juan pedro)")
+env.assert_string("(padre juan maria)")
+
+# Ejecutar reglas
+env.run()
+
+# Salida: pedro y maria
