@@ -1,0 +1,5 @@
+from sympy import symbols, ForAll, exists, real, skolem
+x, y = symbols('x y', real=True)
+afirmacion_original = ForAll(x, exists(y, y > x))
+afirmacion_skolemizada = skolemize(afirmacion_original)
+print(afirmacion_skolemizada)
