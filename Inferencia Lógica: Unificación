@@ -1,0 +1,17 @@
+from sympy import symbols, Eq, solve
+
+# Definimos las variables
+x = symbols('x')
+
+# Expresamos las premisas
+premisa1 = Eq(forall(x, Implies(Humano(x), Mortal(x))))
+premisa2 = Eq(Humano('Socrates'))
+
+# Resolvemos las premisas
+soluciones = solve([premisa1, premisa2])
+
+# Mostramos la conclusión
+if soluciones:
+    print("Sócrates es mortal.")
+else:
+    print("No se puede inferir la mortalidad de Sócrates.")
