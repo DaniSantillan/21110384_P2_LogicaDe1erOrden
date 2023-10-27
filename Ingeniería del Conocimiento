@@ -1,0 +1,15 @@
+# Definición de Constantes y Variables
+hombres = ["Juan", "Pedro", "Carlos"]
+mujeres = ["María", "Ana", "Laura"]
+
+# Relación "esPadreDe"
+esPadreDe = [("Juan", "Pedro"), ("Juan", "Laura"), ("Pedro", "Ana")]
+
+# Función para verificar si alguien es padre de otro
+def es_padre_de(padre, hijo):
+    return (padre, hijo) in esPadreDe
+
+# Ejemplos de consultas
+print("¿Juan es padre de Pedro?", es_padre_de("Juan", "Pedro"))
+print("¿Pedro es padre de Laura?", es_padre_de("Pedro", "Laura"))
+print("¿Ana es hija de Juan?", es_padre_de("Juan", "Ana"))
