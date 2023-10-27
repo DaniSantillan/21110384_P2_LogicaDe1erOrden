@@ -1,0 +1,16 @@
+# Definir el dominio de los elementos
+dominio = [1, 2, 3, 4, 5]
+
+# Predicado: EsPar(x)
+def EsPar(x):
+    return x % 2 == 0
+
+# Cuantificador Existencial: Hay algún número par en el dominio?
+hay_numero_par = any(EsPar(x) for x in dominio)
+
+# Cuantificador Universal: Todos los números en el dominio son pares?
+todos_son_pares = all(EsPar(x) for x in dominio)
+
+# Imprimir resultados
+print("¿Hay algún número par?:", hay_numero_par)
+print("¿Todos son pares?:", todos_son_pares)
