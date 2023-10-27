@@ -1,0 +1,54 @@
+HACIA ADELANTE:
+
+# Base de conocimientos
+conocimientos = [
+    ("Juan", "padre_de", "Carlos"),
+    ("Carlos", "padre_de", "Ana"),
+    ("Ana", "padre_de", "Luis"),
+]
+
+# Regla: Si X es padre de Y, entonces X es abuelo de Z
+def regla_abuelo(X, Y):
+    return ("padre_de", X, Y), ("abuelo_de", X, "?")
+
+# Motor de inferencia hacia adelante
+def encadenamiento_adelante(conocimientos, regla):
+    nuevos_hechos = []
+    for hecho in conocimientos:
+        if hecho[:2] == regla[:2]:
+            nuevos_hechos.append(regla[2](hecho[2]))
+    return nuevos_hechos
+
+# Aplicar la regla de abuelo
+nuevos_hechos_adelante = encadenamiento_adelante(conocimientos, regla_abuelo)
+
+print("Nuevos hechos (hacia adelante):", nuevos_hechos_adelante)
+
+
+HACIA ATRAS:
+
+# Motor de inferencia hacia atrás
+def encadenamiento_atras(meta, reglas, conocimientos):
+    for regla in reglas:
+        if regla[-1] == meta:
+            objetivos = regla[:-1]
+            submetas = [encadenamiento_atras(objetivo, reglas, conocimientos) for objetivo in objetivos]
+            if all(submetas):
+                return True
+    return meta in conocimientos
+
+# Definir reglas
+reglas = [
+    ("Juan", "padre_de", "Carlos"),
+    ("Carlos", "padre_de", "Ana"),
+    ("Ana", "padre_de", "Luis"),
+    (("padre_de", "Juan", "?"), ("abuelo_de", "Juan", "?")),
+]
+
+# Meta: Juan es abuelo de alguien
+meta_atras = ("abuelo_de", "Juan", "?")
+
+# Aplicar el encadenamiento hacia atrás
+resultado_atras = encadenamiento_atras(meta_atras, reglas, conocimientos)
+
+print("Resultado (hacia atrás):", resultado_atras)
