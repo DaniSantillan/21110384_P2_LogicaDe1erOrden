@@ -1,0 +1,23 @@
+from pyswip import Prolog
+
+# Inicializar el agente lógico
+prolog = Prolog()
+
+# Hechos: Algunas afirmaciones sobre animales
+prolog.assertz("es_un_mamifero(leon)")
+prolog.assertz("es_un_mamifero(perro)")
+prolog.assertz("es_un_ave(gorrion)")
+prolog.assertz("vuela(gorrion)")
+
+# Regla: Un animal es un ave si vuela
+prolog.assertz("es_un_ave(X) :- vuela(X)")
+
+# Consultas
+for solucion in prolog.query("es_un_mamifero(X)"):
+    print("Es un mamífero:", solucion["X"])
+
+for solucion in prolog.query("es_un_ave(X)"):
+    print("Es un ave:", solucion["X"])
+
+for solucion in prolog.query("vuela(X)"):
+    print("Vuela:", solucion["X"])
